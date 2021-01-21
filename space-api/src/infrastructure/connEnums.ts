@@ -1,0 +1,62 @@
+require('dotenv').config();
+export const connections = {
+  localhost: {
+    type: 'postgres',
+    host: 'localhost',
+    username: process.env.USER_DB,
+    password: process.env.PASSWORD_DB,
+    database: process.env.DB_NAME,
+    port: 5555,
+    entities: ['src/**/*.entity.ts'],
+    migrations: ['migrations/*.ts'],
+    cli: {
+      migrationsDir: 'migrations',
+    },
+    logging: true,
+  },
+  test: {
+    type: 'postgres',
+    host: `localhost`,
+    username: process.env.USER_DB,
+    password: process.env.PASSWORD_DB,
+    database: `${process.env.DB_NAME}-test`,
+    port: 5554,
+    entities: ['src/**/*.entity.ts'],
+    migrationsTableName: 'migrations',
+    migrations: ['migrations/*.ts'],
+    cli: {
+      migrationsDir: 'migrations',
+    },
+    logging: true,
+  },
+  development: {
+    type: 'postgres',
+    host: `${process.env.SERVICE_NAME}-db`,
+    username: process.env.USER_DB,
+    password: process.env.PASSWORD_DB,
+    database: process.env.DB_NAME,
+    port: 5432,
+    entities: ['src/**/*.entity.ts'],
+    migrationsTableName: 'migrations',
+    migrations: ['migrations/*.ts'],
+    cli: {
+      migrationsDir: 'migrations',
+    },
+    logging: true,
+  },
+  production: {
+    type: 'postgres',
+    username: 'invillia',
+    password: '6a5sd7as87d',
+    database: 'production',
+    host: 'invillia-production.as6d87a8sd7.us-a56sd4a.rds.amazonaws.com',
+    port: 5432,
+    logging: false,
+    entities: ['src/**/*.entity.ts'],
+    migrationsTableName: 'migrations',
+    migrations: ['migrations/*.ts'],
+    cli: {
+      migrationsDir: 'migrations',
+    },
+  },
+};

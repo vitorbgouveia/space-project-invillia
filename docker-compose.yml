@@ -1,0 +1,92 @@
+version: "3.7"
+services:
+  db:
+    container_name: space-db
+    image: postgres
+    restart: always
+    volumes:
+      - "postgres-data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_space
+    ports:
+      - 5555:5432
+    networks:
+      - space-net
+
+  db-test:
+    container_name: space-db-test
+    image: postgres
+    restart: always
+    volumes:
+      - "postgres-data-test:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: db_space-test
+    ports:
+      - 5554:5432
+    networks:
+      - space-net
+
+  space-api:
+    container_name: space-api
+    build:
+      context: ./space-api
+      args:
+        MODE: development
+        PORT: 3000
+    restart: always
+    environment:
+      NODE_ENV: development
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./space-api:/usr/src/app
+    depends_on:
+      - "db"
+    networks:
+      - space-net
+      - auth-net
+
+  auth-api:
+    container_name: auth-api
+    build:
+      context: ./auth-api
+      args:
+        MODE: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./auth-api:/usr/src/app
+    depends_on:
+      - "space-api"
+    ports:
+      - 3001:3000
+    command: npm run start:dev
+    restart: always
+    networks:
+      - auth-net
+
+  space-app:
+    container_name: space-app
+    build:
+      context: ./space-app
+      args:
+        MODE: development
+    command: npm run start
+    restart: always
+    ports:
+      - "3003:3000"
+    volumes:
+      - ./space-app:/usr/src/app
+
+networks:
+  space-net:
+  auth-net:
+
+volumes:
+  postgres-data:
+  postgres-data-test:

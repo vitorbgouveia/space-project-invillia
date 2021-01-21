@@ -1,0 +1,22 @@
+version: '3.7'
+services:
+  api:
+    container_name: auth-api
+    build:
+      context: .
+      args:
+        MODE: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - ${SERVER_PORT}:3000
+    command: npm run start:dev
+    restart: always
+    networks:
+      - auth-net
+
+networks:
+  auth-net:
+    external: true

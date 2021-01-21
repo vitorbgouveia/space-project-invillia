@@ -1,0 +1,15 @@
+version: "3"
+services:
+  space-app:
+    container_name: space-app
+    build:
+      context: .
+      args:
+        MODE: development
+    command: npm run start
+    restart: always
+
+    ports:
+      - "3003:3000"
+    volumes:
+      - .:/usr/src/app
