@@ -20,6 +20,10 @@
 
 - Adicionais: Apis já integradas com ELK(apm) || Jenkins || docker || testes unitários e teste de ponta a ponta || changeLog || Http filters(tratamento de erros) || autorização a níveis de api por pipelines || migrations e seeders || swagger || Helmet.
 
+- Usuário padrão:
+  admin@invillia.com
+  987654321
+
 Lista de funcionalidades space-api:
 
 - @Route("") -> Retorna um status 200 (GET);
@@ -88,7 +92,7 @@ git checkout {nome-da-brach} -b
 Clonar o repositório
 
 ```
-git clone https://github.com/vitorbgouveia/space-project.git
+git clone https://github.com/vitorbgouveia/space-project-invillia.git
 ```
 
 Acessar diretório raiz e executar:

@@ -256,7 +256,7 @@ function Space() {
                         </label>
                       </Col>
                       <Col className="text-left dialogPlanet" style={{
-                        width: 280, height: getPlanetTraveler().id !== planet.id ? 55 : 100,
+                        width: 280, height: getPlanetTraveler().id !== planet.id ? 55 : 120,
                         backgroundColor: 'rgb(255, 255, 255, 0.22)', borderRadius: 12, marginLeft: 100, paddingTop: 15}}>
                         <div style={{ paddingLeft: 25 }}>
                           <p className="label-medium cursor-pointer" onClick={() => goToPlanet(planet)}><b>{'Viajar para o planeta >'}</b></p>
